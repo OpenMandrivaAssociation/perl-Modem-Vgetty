@@ -13,6 +13,7 @@ Source0:	ftp.perl.org/pub/CPAN/modules/by-module/Modem/%{module}-0.03.tar.bz2
 Patch0:		Modem-Vgetty-0.04-VOCP.patch
 URL:		http://www.cpan.org/dist/%{module}
 BuildRequires:	perl-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch:	noarch
 
 %description
