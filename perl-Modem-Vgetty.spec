@@ -1,7 +1,7 @@
 %define module  Modem-Vgetty
 %define name	perl-Modem-Vgetty
 %define version	0.04
-%define release %mkrel 7
+%define release %mkrel 9
 
 Summary:	%{module} module for perl 
 Name:		%{name}
