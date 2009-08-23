@@ -1,46 +1,43 @@
-%define module  Modem-Vgetty
-%define name	perl-Modem-Vgetty
-%define version	0.04
-%define release %mkrel 9
+%define upstream_name       Modem-Vgetty
+%define upstream_version    0.04
 
-Summary:	%{module} module for perl 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
+Summary:	Interface to vgetty(8)
 License:	GPL or Artistic
 Group:		Development/Perl
-Source0:	ftp.perl.org/pub/CPAN/modules/by-module/Modem/%{module}-0.03.tar.bz2
+Url:        http://search.cpan.org/dist/%{upstream_name}
+Source:     http://www.cpan.org/modules/by-module/Modem/%{upstream_name}-0.03.tar.gz
 Patch0:		Modem-Vgetty-0.04-VOCP.patch
-URL:		http://www.cpan.org/dist/%{module}
-BuildRequires:	perl-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch:	noarch
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
-%{module} module for perl
+Modem::Vgetty is an encapsulation object for writing applications for voice
+modems using the vgetty(8) or vm(8) package. The answering machines and
+sofisticated voice applications can be written using this module.
 
 %prep
-
-%setup -q -n %{module}-0.03
+%setup -q -n %{upstream_name}-0.03
 %patch0 -p1
 # perl path hack
-find . -type f | xargs %{__perl} -p -i -e "s|^#\!/usr/local/bin/perl|#\!/usr/bin/perl|g"
+find . -type f | \
+    xargs %{__perl} -pi -e "s|^#\!/usr/local/bin/perl|#\!/usr/bin/perl|g"
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor </dev/null
+%{__perl} Makefile.PL INSTALLDIRS=vendor
 %{__make}
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot} 
-
+rm -rf %{buildroot} 
 %makeinstall_std
 
 %clean 
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot} 
+rm -rf %{buildroot} 
 
 %files
 %defattr(-,root,root)
 %doc examples ChangeLog README
-%{perl_vendorlib}/Modem/*.pm
+%{perl_vendorlib}/Modem
 %{_mandir}/man3*/*
-
