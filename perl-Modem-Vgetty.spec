@@ -13,6 +13,7 @@ Url:        https://search.cpan.org/dist/%{upstream_name}
 Source0:	http://www.cpan.org/modules/by-module/Modem/%{upstream_name}-0.03.tar.gz
 Patch0:		Modem-Vgetty-0.03-VOCP.patch
 
+BuildRequires:	make
 BuildRequires:	perl-devel
 BuildArch:	noarch
 
